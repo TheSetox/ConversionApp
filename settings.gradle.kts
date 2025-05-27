@@ -23,3 +23,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "ConversionApp"
 include(":app")
 include(":core:network")
+include(":core:designsystem")

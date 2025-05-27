@@ -1,4 +1,4 @@
-package com.thesetox.conversionapp.ui.theme
+package com.thesetox.designsystem
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

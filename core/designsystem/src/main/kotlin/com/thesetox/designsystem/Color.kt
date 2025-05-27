@@ -1,4 +1,4 @@
-package com.thesetox.conversionapp.ui.theme
+package com.thesetox.designsystem
 
 import androidx.compose.ui.graphics.Color
 

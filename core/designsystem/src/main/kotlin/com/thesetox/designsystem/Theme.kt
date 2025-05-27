@@ -1,4 +1,4 @@
-package com.thesetox.conversionapp.ui.theme
+package com.thesetox.designsystem
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
