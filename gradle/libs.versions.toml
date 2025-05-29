@@ -11,6 +11,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 
 # Android
+kotlinxCoroutinesCore = "1.10.1"
 lifecycleRuntimeKtx = "2.9.0"
 
 # Compose
@@ -37,6 +38,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 
 # Android
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 
 # Compose
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }

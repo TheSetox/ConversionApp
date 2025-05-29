@@ -1,13 +1,12 @@
 package com.thesetox.conversionapp
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.thesetox.designsystem.ConversionAppTheme
-import org.koin.core.component.KoinComponent
+import com.thesetox.sync.SyncActivity
 
-class MainActivity : ComponentActivity(), KoinComponent {
+class MainActivity : SyncActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

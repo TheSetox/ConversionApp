@@ -7,8 +7,12 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class CurrencyRateApi(private val client: HttpClient) {
-    suspend fun fetchCurrencyRates(): ApiResult<CurrencyRateResponse> {
+interface CurrencyRateApi {
+    suspend fun fetchCurrencyRates(): ApiResult<CurrencyRateResponse>
+}
+
+class CurrencyRateRemoteSource(private val client: HttpClient) : CurrencyRateApi {
+    override suspend fun fetchCurrencyRates(): ApiResult<CurrencyRateResponse> {
         val endpoint = "/tasks/api/currency-exchange-rates"
         val url = BASE_URL + endpoint
         return runCatching {
@@ -38,6 +42,6 @@ suspend fun main() {
                 )
             }
         }
-    val api = CurrencyRateApi(client)
+    val api = CurrencyRateRemoteSource(client)
     print(api.fetchCurrencyRates())
 }

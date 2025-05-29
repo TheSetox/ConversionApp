@@ -24,3 +24,4 @@ rootProject.name = "ConversionApp"
 include(":app")
 include(":core:network")
 include(":core:designsystem")
+include(":feature:sync")

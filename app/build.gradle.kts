@@ -42,6 +42,7 @@ android {
 dependencies {
     // Local modules
     implementation(projects.core.network)
+    implementation(projects.feature.sync)
     api(projects.core.designsystem)
 
     // Android
