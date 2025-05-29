@@ -40,10 +40,13 @@ android {
 }
 
 dependencies {
-    // Local modules
+    // Local core modules
     implementation(projects.core.network)
-    implementation(projects.feature.sync)
+    implementation(projects.core.domain)
     api(projects.core.designsystem)
+
+    // Local feature modules
+    implementation(projects.feature.sync)
 
     // Android
     implementation(libs.androidx.core.ktx)

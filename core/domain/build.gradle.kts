@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.thesetox.sync"
+    namespace = "com.thesetox.domain"
     compileSdk = 35
 
     defaultConfig {
@@ -33,10 +33,7 @@ android {
 }
 
 dependencies {
-    api(projects.core.network)
-    implementation(projects.core.domain)
-
-    implementation(libs.kotlinx.coroutines.core)
+    implementation(projects.core.network)
 
     // Koin
     implementation(libs.koin.android)

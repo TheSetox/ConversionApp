@@ -1,10 +1,9 @@
-package com.thesetox.sync.usecase
+package com.thesetox.domain
 
 import com.thesetox.network.ApiResult
 import com.thesetox.network.CurrencyRateResponse
-import com.thesetox.sync.SyncRepository
 
-class SyncApiUseCase(private val repository: SyncRepository) {
+class FetchCurrencyRatesUseCase(private val repository: SyncRepository) {
     suspend operator fun invoke(): ApiResult<CurrencyRateResponse> {
         return repository.fetchCurrencyRates()
     }
