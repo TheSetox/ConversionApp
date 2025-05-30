@@ -9,5 +9,5 @@ val syncModule =
     module {
         singleOf(::SyncDataRepository) { bind<SyncRepository>() }
 
-        single<SyncUseCase> { SyncUseCase(get()) }
+        single<SyncUseCase> { SyncUseCase(get(), get()) }
     }
