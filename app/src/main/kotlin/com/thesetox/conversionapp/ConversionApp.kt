@@ -1,6 +1,7 @@
 package com.thesetox.conversionapp
 
 import android.app.Application
+import com.thesetox.datastore.dataStoreModule
 import com.thesetox.domain.domainModule
 import com.thesetox.network.networkModule
 import com.thesetox.sync.syncModule
@@ -12,7 +13,7 @@ class ConversionApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@ConversionApp)
-            modules(listOf(networkModule, domainModule, syncModule))
+            modules(listOf(networkModule, domainModule, syncModule, dataStoreModule))
         }
     }
 }

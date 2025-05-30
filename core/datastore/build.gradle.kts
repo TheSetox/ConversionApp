@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.thesetox.sync"
+    namespace = "com.thesetox.datastore"
     compileSdk = 35
 
     defaultConfig {
@@ -33,16 +33,11 @@ android {
 }
 
 dependencies {
-    api(projects.core.network)
-    implementation(projects.core.domain)
-    implementation(projects.core.datastore)
+    //DataStore
+    implementation (libs.androidx.datastore.preferences)
+    implementation (libs.androidx.datastore.core)
 
-    implementation(libs.kotlinx.coroutines.core)
-
-    // Koin
+    // koin
     implementation(libs.koin.android)
     implementation(libs.koin.core)
-
-    // Serializer
-    implementation(libs.kotlinx.serialization.json)
 }
