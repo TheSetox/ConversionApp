@@ -34,7 +34,7 @@ class SyncService : Service(), KoinComponent {
         job =
             CoroutineScope(Dispatchers.IO).launch {
                 while (isActive) {
-                    Log.d(TAG, "syncing..")
+                    Log.d(TAG, SYNCING)
                     Log.i(TAG, sync())
                     delay(5000)
                 }
@@ -52,5 +52,6 @@ class SyncService : Service(), KoinComponent {
 
     companion object {
         private val TAG = SyncService::class.java.simpleName
+        private const val SYNCING = "syncing.."
     }
 }

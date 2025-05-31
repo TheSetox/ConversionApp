@@ -1,7 +1,6 @@
 package com.thesetox.sync
 
 import com.thesetox.datastore.AppDataStore
-import com.thesetox.domain.SyncRepository
 import com.thesetox.network.ApiResult
 import com.thesetox.network.CurrencyRateApi
 import com.thesetox.network.CurrencyRateResponse

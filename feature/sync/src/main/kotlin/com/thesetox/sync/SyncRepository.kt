@@ -1,4 +1,4 @@
-package com.thesetox.domain
+package com.thesetox.sync
 
 import com.thesetox.network.ApiResult
 import com.thesetox.network.CurrencyRateResponse

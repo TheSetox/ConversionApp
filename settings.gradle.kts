@@ -26,7 +26,6 @@ include(":app")
 // core modules
 include(":core:network")
 include(":core:designsystem")
-include(":core:domain")
 include(":core:datastore")
 
 // feature modules

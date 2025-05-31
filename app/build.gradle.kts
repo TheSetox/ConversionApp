@@ -42,7 +42,6 @@ android {
 dependencies {
     // Local core modules
     implementation(projects.core.network)
-    implementation(projects.core.domain)
     implementation(projects.core.datastore)
     api(projects.core.designsystem)
 

@@ -34,7 +34,6 @@ android {
 
 dependencies {
     api(projects.core.network)
-    implementation(projects.core.domain)
     implementation(projects.core.datastore)
 
     implementation(libs.kotlinx.coroutines.core)
