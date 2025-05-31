@@ -18,7 +18,11 @@ class SyncUseCase(
                 val hash = result.data.convertToMd5()
                 val isSyncNeeded = isSyncNeeded(hash)
                 // TODO save to database when
-                return if (isSyncNeeded) "Sync Completed" else "Sync not needed"
+                return if (isSyncNeeded) {
+                    syncRepository.saveCurrencyRateHash(hash)
+                    "Sync Completed"
+                }
+                else "Sync not needed"
             }
         }
     }
