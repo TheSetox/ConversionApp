@@ -43,6 +43,7 @@ dependencies {
     // Local core modules
     implementation(projects.core.network)
     implementation(projects.core.datastore)
+    implementation(projects.core.databse)
     api(projects.core.designsystem)
 
     // Local feature modules

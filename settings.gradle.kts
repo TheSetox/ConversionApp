@@ -30,3 +30,4 @@ include(":core:datastore")
 
 // feature modules
 include(":feature:sync")
+include(":core:databse")

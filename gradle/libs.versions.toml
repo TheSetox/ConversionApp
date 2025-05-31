@@ -5,6 +5,7 @@ agp = "8.10.1"
 kotlin = "2.1.20"
 coreKtx = "1.16.0"
 kotlinxSerializationJson = "1.8.0"
+ksp = "2.1.20-2.0.1"
 
 # Testing
 junit = "4.13.2"
@@ -30,6 +31,9 @@ koin = "4.0.1"
 
 # datastore
 datastorePreferences = "1.1.7"
+
+# Database
+room = "2.7.1"
 
 [libraries]
 # Kotlin
@@ -74,10 +78,17 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 # Serializer
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+# room
+androidx-room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
+androidx-room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
+androidx-room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+android-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+room = { id = "androidx.room", version.ref = "room" }
 
