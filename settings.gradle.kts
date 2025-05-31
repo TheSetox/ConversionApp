@@ -27,7 +27,8 @@ include(":app")
 include(":core:network")
 include(":core:designsystem")
 include(":core:datastore")
+include(":core:database")
 
 // feature modules
 include(":feature:sync")
-include(":core:databse")
+include(":feature:exchange")

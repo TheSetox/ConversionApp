@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.thesetox.sync"
+    namespace = "com.thesetox.exchange"
     compileSdk = 35
 
     defaultConfig {
@@ -30,19 +31,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
-    api(projects.core.network)
-    implementation(projects.core.datastore)
     implementation(projects.core.database)
-
-    implementation(libs.kotlinx.coroutines.core)
+    api(projects.core.designsystem)
 
     // Koin
+    implementation(libs.koin.androidx.compose)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
-
-    // Serializer
-    implementation(libs.kotlinx.serialization.json)
 }

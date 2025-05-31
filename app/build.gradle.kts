@@ -43,11 +43,12 @@ dependencies {
     // Local core modules
     implementation(projects.core.network)
     implementation(projects.core.datastore)
-    implementation(projects.core.databse)
+    implementation(projects.core.database)
     api(projects.core.designsystem)
 
     // Local feature modules
     implementation(projects.feature.sync)
+    implementation(projects.feature.exchange)
 
     // Android
     implementation(libs.androidx.core.ktx)

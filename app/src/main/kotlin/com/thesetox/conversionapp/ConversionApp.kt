@@ -3,6 +3,7 @@ package com.thesetox.conversionapp
 import android.app.Application
 import com.thesetox.databse.databaseModule
 import com.thesetox.datastore.dataStoreModule
+import com.thesetox.exchange.exchangeModule
 import com.thesetox.network.networkModule
 import com.thesetox.sync.syncModule
 import org.koin.android.ext.koin.androidContext
@@ -23,5 +24,6 @@ class ConversionApp : Application() {
             dataStoreModule,
             databaseModule,
             syncModule,
+            exchangeModule,
         )
 }

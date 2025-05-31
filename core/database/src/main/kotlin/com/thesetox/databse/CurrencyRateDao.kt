@@ -3,11 +3,12 @@ package com.thesetox.databse
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CurrencyRateDao {
     @Query("SELECT * FROM currency_rate")
-    suspend fun getCurrencyRateList(): List<CurrencyRateEntity>
+    fun getCurrencyRateList(): Flow<List<CurrencyRateEntity>>
 
     @Query("SELECT * FROM currency_rate WHERE currencyCode = :code")
     suspend fun getRate(code: String): CurrencyRateEntity?
