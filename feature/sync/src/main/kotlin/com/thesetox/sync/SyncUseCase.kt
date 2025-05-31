@@ -1,5 +1,6 @@
 package com.thesetox.sync
 
+import com.thesetox.databse.CurrencyRateEntity
 import com.thesetox.network.ApiResult
 import com.thesetox.network.CurrencyRateResponse
 import kotlinx.serialization.json.Json
@@ -15,7 +16,9 @@ class SyncUseCase(private val repository: SyncRepository) {
                 val isSyncNeeded = isSyncNeeded(hash)
                 return if (isSyncNeeded) {
                     repository.saveCurrencyRateHash(hash)
-                    // TODO add saving the response to the database.
+                    val list = result.toListOfCurrencyRateEntity()
+                    repository.clearRates()
+                    repository.saveCurrencyRates(list)
                     SYNC_COMPLETE
                 } else {
                     SYNC_NOT_NEEDED
@@ -37,6 +40,17 @@ class SyncUseCase(private val repository: SyncRepository) {
         val md = MessageDigest.getInstance(MD5_ALGORITHM)
         val digest = md.digest(this.toByteArray())
         return digest.joinToString("") { "%02x".format(it) }
+    }
+
+    private fun CurrencyRateResponse.toListOfCurrencyRateEntity(): List<CurrencyRateEntity> {
+        return rates.map {
+            CurrencyRateEntity(
+                currencyCode = it.key,
+                rate = it.value,
+                baseCurrency = base,
+                date = date,
+            )
+        }
     }
 
     companion object {

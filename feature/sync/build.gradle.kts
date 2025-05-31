@@ -35,6 +35,7 @@ android {
 dependencies {
     api(projects.core.network)
     implementation(projects.core.datastore)
+    implementation(projects.core.databse)
 
     implementation(libs.kotlinx.coroutines.core)
 
