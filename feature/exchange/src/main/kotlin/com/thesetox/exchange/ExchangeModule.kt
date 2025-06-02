@@ -1,7 +1,7 @@
 package com.thesetox.exchange
 
 import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
-import com.thesetox.exchange.usecase.GetListOfCurrencyRateUseCase
+import com.thesetox.exchange.usecase.GetListOfCurrencyUseCase
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
@@ -12,7 +12,7 @@ val exchangeModule =
         singleOf(::ExchangeDataRepository) { bind<ExchangeRepository>() }
 
         // use case
-        singleOf(::GetListOfCurrencyRateUseCase)
+        singleOf(::GetListOfCurrencyUseCase)
         singleOf(::ConvertCurrencyUseCase)
 
         // viewmodel

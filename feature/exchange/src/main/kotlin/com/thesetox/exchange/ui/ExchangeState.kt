@@ -6,4 +6,5 @@ data class ExchangeState(
     val selectedSellCurrency: String = "EUR",
     val selectedReceiveCurrency: String = "USD",
     val listOfBalance: List<String> = emptyList(),
+    val listOfCurrencies: List<String> = emptyList(),
 )

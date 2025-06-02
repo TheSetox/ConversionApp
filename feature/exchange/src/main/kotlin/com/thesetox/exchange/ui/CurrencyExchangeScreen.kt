@@ -7,6 +7,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +20,7 @@ import com.thesetox.designsystem.component.ConversionTopBar
 import com.thesetox.exchange.ExchangeViewModel
 import com.thesetox.exchange.R
 import com.thesetox.exchange.ui.component.BalanceLazyRow
+import com.thesetox.exchange.ui.component.CurrencyBottomSheet
 import com.thesetox.exchange.ui.component.ReceiveRow
 import com.thesetox.exchange.ui.component.SellRow
 import com.thesetox.exchange.ui.component.SubmitButton
@@ -26,14 +30,38 @@ import org.koin.androidx.compose.koinViewModel
 fun CurrencyExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    var showCurrencySheet by remember { mutableStateOf(false) }
+    var isSelectingSellCurrency by remember { mutableStateOf(true) }
+
     CurrencyExchangeScaffold(
         state = state,
         onSellValueChanged = { viewModel.onSellValueChanged(it) },
-        onSellSpinnerClicked = { TODO("Show Bottom sheet") },
+        onSellSpinnerClicked = {
+            isSelectingSellCurrency = true
+            showCurrencySheet = true
+        },
         onReceiveValueChanged = { viewModel.onReceiveValueChanged(it) },
-        onReceiveSpinnerClicked = { TODO("Show Bottom sheet") },
+        onReceiveSpinnerClicked = {
+            isSelectingSellCurrency = false
+            showCurrencySheet = true
+        },
         onSubmit = { viewModel.onSubmit() },
     )
+
+    if (showCurrencySheet) {
+        CurrencyBottomSheet(
+            currencies = state.listOfCurrencies,
+            onCurrencySelected = { selected ->
+                if (isSelectingSellCurrency) {
+                    viewModel.onSelectedSellCurrency(selected)
+                } else {
+                    viewModel.onSelectedReceiveCurrency(selected)
+                }
+                showCurrencySheet = false
+            },
+            onDismissRequest = { showCurrencySheet = false },
+        )
+    }
 }
 
 @Composable
