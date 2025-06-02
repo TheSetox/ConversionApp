@@ -12,7 +12,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.thesetox.databse.CurrencyRateEntity
 import com.thesetox.designsystem.component.ConversionSpacer
 import com.thesetox.designsystem.component.ConversionTopBar
 import com.thesetox.exchange.ExchangeViewModel
@@ -39,7 +38,7 @@ fun CurrencyExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
 
 @Composable
 private fun CurrencyExchangeScaffold(
-    state: List<CurrencyRateEntity> = emptyList(),
+    state: ExchangeState = ExchangeState(),
     onSellValueChanged: (String) -> Unit = {},
     onSellSpinnerClicked: () -> Unit = {},
     onReceiveValueChanged: (String) -> Unit = {},
@@ -63,7 +62,7 @@ private fun CurrencyExchangeScaffold(
 
 @Composable
 private fun PaddingValues.CurrencyExchangeContent(
-    state: List<CurrencyRateEntity>,
+    state: ExchangeState = ExchangeState(),
     onSellValueChanged: (String) -> Unit = {},
     onSellSpinnerClicked: () -> Unit = {},
     onReceiveValueChanged: (String) -> Unit = {},
@@ -81,23 +80,23 @@ private fun PaddingValues.CurrencyExchangeContent(
         Text(stringResource(R.string.my_balance_title))
         ConversionSpacer(16.dp)
 
-        BalanceLazyRow()
+        BalanceLazyRow(listOfBalance = state.listOfBalance)
         ConversionSpacer(24.dp)
 
         Text(stringResource(R.string.currency_exchange_title))
         ConversionSpacer(16.dp)
 
         SellRow(
-            value = "",
-            currency = "",
+            value = state.sellAmount,
+            currency = state.selectedSellCurrency,
             onValueChanged = onSellValueChanged,
             onSpinnerClicked = onSellSpinnerClicked,
         )
         ConversionSpacer(16.dp)
 
         ReceiveRow(
-            value = "",
-            currency = "",
+            value = state.receiveAmount,
+            currency = state.selectedReceiveCurrency,
             onValueChanged = onReceiveValueChanged,
             onSpinnerClicked = onReceiveSpinnerClicked,
         )

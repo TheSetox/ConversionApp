@@ -3,36 +3,37 @@ package com.thesetox.exchange
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thesetox.databse.CurrencyRateEntity
-import kotlinx.coroutines.flow.SharingStarted
+import com.thesetox.exchange.ui.ExchangeState
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ExchangeViewModel(
     getListOfCurrencyRate: GetListOfCurrencyRateUseCase,
 ) : ViewModel() {
-    val state: StateFlow<List<CurrencyRateEntity>> =
-        getListOfCurrencyRate().stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = emptyList(),
-        )
+    private val _state = MutableStateFlow<ExchangeState>(ExchangeState())
+    val state: StateFlow<ExchangeState> = _state
 
     fun onSellValueChanged(value: String) {
         viewModelScope.launch {
+            _state.emit(_state.value.copy(sellAmount = value))
+            // TODO convert receive amount, pass selected currency.
             Log.d(TAG, "onSellValueChanged: $value")
         }
     }
 
     fun onReceiveValueChanged(value: String) {
         viewModelScope.launch {
+            _state.emit(_state.value.copy(receiveAmount = value))
+            // TODO convert receive amount, pass selected currency.
             Log.d(TAG, "onReceiveValueChanged: $value")
         }
     }
 
     fun onSubmit() {
         viewModelScope.launch {
+            // TODO check commission rates and get sellAmount and receiveAmount.
+            // Also get the selected currencies. Deduct and add balance.
             Log.d(TAG, "onSubmit")
         }
     }
