@@ -97,8 +97,8 @@ class ExchangeViewModel(
                     sellAmount =
                         convertCurrency(
                             amount = currentState.receiveAmount,
-                            toCurrency = selected,
-                            fromCurrency = currentState.selectedSellCurrency,
+                            toCurrency = currentState.selectedSellCurrency,
+                            fromCurrency = selected,
                         ),
                 ),
             )
