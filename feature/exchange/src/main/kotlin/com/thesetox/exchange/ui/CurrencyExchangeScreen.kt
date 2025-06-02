@@ -26,19 +26,50 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CurrencyExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    CurrencyExchangeScaffold(state)
-}
 
-@Composable
-private fun CurrencyExchangeScaffold(state: List<CurrencyRateEntity> = emptyList()) {
-    Scaffold(
-        topBar = { ConversionTopBar(stringId = R.string.currency_converter_title) },
-        content = { it.CurrencyExchangeContent(state) },
+    CurrencyExchangeScaffold(
+        state = state,
+        onSellValueChanged = { viewModel.onSellValueChanged(it) },
+        onSellSpinnerClicked = { TODO("Show Bottom sheet") },
+        onReceiveValueChanged = { viewModel.onReceiveValueChanged(it) },
+        onReceiveSpinnerClicked = { TODO("Show Bottom sheet") },
+        onSubmit = { viewModel.onSubmit() },
     )
 }
 
 @Composable
-private fun PaddingValues.CurrencyExchangeContent(state: List<CurrencyRateEntity>) {
+private fun CurrencyExchangeScaffold(
+    state: List<CurrencyRateEntity> = emptyList(),
+    onSellValueChanged: (String) -> Unit = {},
+    onSellSpinnerClicked: () -> Unit = {},
+    onReceiveValueChanged: (String) -> Unit = {},
+    onReceiveSpinnerClicked: () -> Unit = {},
+    onSubmit: () -> Unit = {},
+) {
+    Scaffold(
+        topBar = { ConversionTopBar(stringId = R.string.currency_converter_title) },
+        content = {
+            it.CurrencyExchangeContent(
+                state = state,
+                onSellValueChanged = onSellValueChanged,
+                onSellSpinnerClicked = onSellSpinnerClicked,
+                onReceiveValueChanged = onReceiveValueChanged,
+                onReceiveSpinnerClicked = onReceiveSpinnerClicked,
+                onSubmit = onSubmit,
+            )
+        },
+    )
+}
+
+@Composable
+private fun PaddingValues.CurrencyExchangeContent(
+    state: List<CurrencyRateEntity>,
+    onSellValueChanged: (String) -> Unit = {},
+    onSellSpinnerClicked: () -> Unit = {},
+    onReceiveValueChanged: (String) -> Unit = {},
+    onReceiveSpinnerClicked: () -> Unit = {},
+    onSubmit: () -> Unit = {},
+) {
     Column(
         modifier =
             Modifier
@@ -56,13 +87,23 @@ private fun PaddingValues.CurrencyExchangeContent(state: List<CurrencyRateEntity
         Text(stringResource(R.string.currency_exchange_title))
         ConversionSpacer(16.dp)
 
-        SellRow()
+        SellRow(
+            value = "",
+            currency = "",
+            onValueChanged = onSellValueChanged,
+            onSpinnerClicked = onSellSpinnerClicked,
+        )
         ConversionSpacer(16.dp)
 
-        ReceiveRow()
+        ReceiveRow(
+            value = "",
+            currency = "",
+            onValueChanged = onReceiveValueChanged,
+            onSpinnerClicked = onReceiveSpinnerClicked,
+        )
         ConversionSpacer(24.dp)
 
-        SubmitButton()
+        SubmitButton { onSubmit() }
     }
 }
 

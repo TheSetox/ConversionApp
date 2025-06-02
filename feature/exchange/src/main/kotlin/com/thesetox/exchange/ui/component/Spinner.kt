@@ -10,16 +10,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.thesetox.designsystem.MediumTextStyle
 
 @Composable
-fun CurrencySpinner(onClick: () -> Unit = {}) {
+fun CurrencySpinner(
+    currency: String,
+    onClick: () -> Unit = {},
+) {
     Row(
         modifier = Modifier.clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "EUR", style = MediumTextStyle)
+        Text(text = currency, style = MediumTextStyle)
         Icon(
             imageVector = Icons.Default.KeyboardArrowDown,
             contentDescription = null,
@@ -27,3 +31,7 @@ fun CurrencySpinner(onClick: () -> Unit = {}) {
         )
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun CurrencySpinnerPreview() = CurrencySpinner("EUR")

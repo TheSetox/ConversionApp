@@ -2,7 +2,7 @@ package com.thesetox.exchange
 
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
-import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val exchangeModule =
@@ -13,5 +13,5 @@ val exchangeModule =
         singleOf(::GetListOfCurrencyRateUseCase)
 
         // viewmodel
-        viewModelOf(::ExchangeViewModel)
+        viewModel { ExchangeViewModel(get()) }
     }
