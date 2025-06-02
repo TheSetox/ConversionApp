@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="currency_exchange_title">Currency converter</string>
+    <string name="currency_converter_title">Currency converter</string>
+    <string name="my_balance_title">MY BALANCES</string>
+    <string name="currency_exchange_title">CURRENCY EXCHANGE</string>
+    <string name="sell_label">Sell</string>
+    <string name="receive_label">Receive</string>
+    <string name="submit_button">Submit</string>
 </resources>

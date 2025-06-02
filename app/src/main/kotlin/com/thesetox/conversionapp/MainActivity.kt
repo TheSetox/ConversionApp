@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.thesetox.designsystem.ConversionAppTheme
-import com.thesetox.exchange.CurrencyExchangeScreen
+import com.thesetox.exchange.ui.CurrencyExchangeScreen
 import com.thesetox.sync.SyncActivity
 
 class MainActivity : SyncActivity() {
