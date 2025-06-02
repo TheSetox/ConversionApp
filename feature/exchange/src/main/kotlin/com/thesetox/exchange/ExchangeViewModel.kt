@@ -4,29 +4,55 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thesetox.exchange.ui.ExchangeState
+import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
+import com.thesetox.exchange.usecase.GetListOfCurrencyRateUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class ExchangeViewModel(
-    getListOfCurrencyRate: GetListOfCurrencyRateUseCase,
+    private val getListOfCurrencyRate: GetListOfCurrencyRateUseCase,
+    private val convertCurrency: ConvertCurrencyUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow<ExchangeState>(ExchangeState())
-    val state: StateFlow<ExchangeState> = _state
+    val state: StateFlow<ExchangeState> = _state.asStateFlow()
 
     fun onSellValueChanged(value: String) {
+        Log.d(TAG, "onSellValueChanged: $value")
         viewModelScope.launch {
-            _state.emit(_state.value.copy(sellAmount = value))
-            // TODO convert receive amount, pass selected currency.
-            Log.d(TAG, "onSellValueChanged: $value")
+            val currentState = _state.value
+            if (currentState.sellAmount == value) return@launch // 👈 Prevent redundant emit
+            _state.emit(
+                currentState.copy(
+                    sellAmount = value,
+                    receiveAmount =
+                        convertCurrency(
+                            amount = value,
+                            toCurrency = currentState.selectedReceiveCurrency,
+                            fromCurrency = currentState.selectedSellCurrency,
+                        ),
+                ),
+            )
         }
     }
 
     fun onReceiveValueChanged(value: String) {
+        Log.d(TAG, "onReceiveValueChanged: $value")
         viewModelScope.launch {
-            _state.emit(_state.value.copy(receiveAmount = value))
-            // TODO convert receive amount, pass selected currency.
-            Log.d(TAG, "onReceiveValueChanged: $value")
+            val currentState = _state.value
+            if (currentState.sellAmount == value) return@launch
+            _state.emit(
+                currentState.copy(
+                    receiveAmount = value,
+                    sellAmount =
+                        convertCurrency(
+                            amount = value,
+                            toCurrency = currentState.selectedSellCurrency,
+                            fromCurrency = currentState.selectedReceiveCurrency,
+                        ),
+                ),
+            )
         }
     }
 

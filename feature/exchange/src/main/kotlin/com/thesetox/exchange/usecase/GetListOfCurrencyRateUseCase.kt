@@ -1,6 +1,7 @@
-package com.thesetox.exchange
+package com.thesetox.exchange.usecase
 
 import com.thesetox.databse.CurrencyRateEntity
+import com.thesetox.exchange.ExchangeRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetListOfCurrencyRateUseCase(private val repository: ExchangeRepository) {
