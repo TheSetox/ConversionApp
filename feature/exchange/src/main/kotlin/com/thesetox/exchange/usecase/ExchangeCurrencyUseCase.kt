@@ -4,7 +4,7 @@ import com.thesetox.exchange.model.Balance
 import com.thesetox.exchange.model.ExchangeResult
 import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
 
-class ExchangeCurrencyUseCase {
+class ExchangeCurrencyUseCase(private val getCommission: GetCommissionUseCase) {
     operator fun invoke(
         sellAmount: String,
         receiveAmount: String,
@@ -25,30 +25,33 @@ class ExchangeCurrencyUseCase {
         val balances = currentBalances.associateBy { it.code }.toMutableMap()
 
         val sellBalance =
-            balances[selectedSellCurrency]?.value ?: return ExchangeResultWithUpdatedBalances(
-                result = ExchangeResult.Error("No $selectedSellCurrency balance"),
-                updatedBalances = currentBalances,
-            )
+            balances[selectedSellCurrency]?.value
+                ?: return ExchangeResultWithUpdatedBalances(
+                    result = ExchangeResult.Error("No $selectedSellCurrency balance"),
+                    updatedBalances = currentBalances,
+                )
 
-        if (sellBalance <= sell) {
+        val commission = getCommission(sell, selectedSellCurrency)
+        val totalToDeduct = sell + commission
+
+        if (sellBalance < totalToDeduct) {
             return ExchangeResultWithUpdatedBalances(
                 result =
                     ExchangeResult.Error(
-                        "Insufficient $selectedSellCurrency balance, " +
-                            "amount should not be equal or greater than the balance",
+                        "Insufficient $selectedSellCurrency balance. Required: $totalToDeduct",
                     ),
                 updatedBalances = currentBalances,
             )
         }
 
-        val updatedSell = sellBalance - sell
+        val updatedSell = sellBalance - totalToDeduct
         val updatedReceive = balances[selectedReceiveCurrency]?.value?.plus(receive) ?: receive
 
         balances[selectedSellCurrency] = Balance(selectedSellCurrency, updatedSell)
         balances[selectedReceiveCurrency] = Balance(selectedReceiveCurrency, updatedReceive)
 
         return ExchangeResultWithUpdatedBalances(
-            result = ExchangeResult.Success,
+            result = ExchangeResult.Success(commission.toString()),
             updatedBalances = balances.values.toList(),
         )
     }

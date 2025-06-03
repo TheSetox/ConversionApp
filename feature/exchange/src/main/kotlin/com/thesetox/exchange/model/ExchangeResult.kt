@@ -1,7 +1,7 @@
 package com.thesetox.exchange.model
 
 sealed class ExchangeResult {
-    data object Success : ExchangeResult()
+    data class Success(val commissionFee: String) : ExchangeResult()
 
     data class Error(val message: String) : ExchangeResult()
 }

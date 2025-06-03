@@ -5,6 +5,7 @@ import com.thesetox.exchange.repository.ExchangeRepository
 import com.thesetox.exchange.ui.ExchangeViewModel
 import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
 import com.thesetox.exchange.usecase.ExchangeCurrencyUseCase
+import com.thesetox.exchange.usecase.GetCommissionUseCase
 import com.thesetox.exchange.usecase.GetDefaultBalanceUseCase
 import com.thesetox.exchange.usecase.GetListOfCurrencyUseCase
 import org.koin.core.module.dsl.bind
@@ -21,6 +22,7 @@ val exchangeModule =
         singleOf(::ConvertCurrencyUseCase)
         singleOf(::ExchangeCurrencyUseCase)
         singleOf(::GetDefaultBalanceUseCase)
+        singleOf(::GetCommissionUseCase)
 
         // viewmodel
         viewModel { ExchangeViewModel(get(), get(), get(), get()) }

@@ -142,7 +142,9 @@ class ExchangeViewModel(
                         "You have converted ${currentState.sellAmount} " +
                             "${currentState.selectedSellCurrency} to " +
                             "${currentState.receiveAmount} " +
-                            "${currentState.selectedReceiveCurrency}."
+                            "${currentState.selectedReceiveCurrency}. " +
+                            "Commission Fee: ${result.commissionFee} " +
+                            "${currentState.selectedSellCurrency}."
                     _effect.emit(ExchangeEffect.ShowDialog(message))
                 }
             }
