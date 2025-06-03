@@ -3,13 +3,13 @@ package com.thesetox.exchange.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thesetox.balance.GetDefaultBalanceUseCase
 import com.thesetox.exchange.model.ExchangeEffect
 import com.thesetox.exchange.model.ExchangeResult
 import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
 import com.thesetox.exchange.model.ExchangeState
 import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
 import com.thesetox.exchange.usecase.ExchangeCurrencyUseCase
-import com.thesetox.exchange.usecase.GetDefaultBalanceUseCase
 import com.thesetox.exchange.usecase.GetListOfCurrencyUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

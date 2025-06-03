@@ -1,5 +1,7 @@
 package com.thesetox.exchange.model
 
+import com.thesetox.balance.Balance
+
 sealed class ExchangeResult {
     data class Success(val commissionFee: String) : ExchangeResult()
 

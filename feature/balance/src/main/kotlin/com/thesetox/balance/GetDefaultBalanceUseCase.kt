@@ -1,6 +1,4 @@
-package com.thesetox.exchange.usecase
-
-import com.thesetox.exchange.model.Balance
+package com.thesetox.balance
 
 class GetDefaultBalanceUseCase {
     operator fun invoke(): List<Balance> {

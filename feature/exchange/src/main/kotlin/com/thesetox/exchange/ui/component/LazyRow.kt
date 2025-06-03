@@ -6,8 +6,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import com.thesetox.balance.Balance
 import com.thesetox.designsystem.MediumTextStyle
-import com.thesetox.exchange.model.Balance
 
 @Composable
 fun BalanceLazyRow(listOfBalance: List<Balance>) {

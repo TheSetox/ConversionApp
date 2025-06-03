@@ -1,4 +1,4 @@
-package com.thesetox.exchange.model
+package com.thesetox.balance
 
 data class Balance(
     val code: String,

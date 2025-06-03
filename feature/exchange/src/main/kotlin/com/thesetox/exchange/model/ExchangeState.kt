@@ -1,5 +1,7 @@
 package com.thesetox.exchange.model
 
+import com.thesetox.balance.Balance
+
 data class ExchangeState(
     val sellAmount: String = "0",
     val receiveAmount: String = "0",

@@ -32,3 +32,4 @@ include(":core:database")
 // feature modules
 include(":feature:sync")
 include(":feature:exchange")
+include(":feature:balance")

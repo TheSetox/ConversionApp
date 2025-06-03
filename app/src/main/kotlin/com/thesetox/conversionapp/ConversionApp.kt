@@ -1,6 +1,7 @@
 package com.thesetox.conversionapp
 
 import android.app.Application
+import com.thesetox.balance.balanceModule
 import com.thesetox.databse.databaseModule
 import com.thesetox.datastore.dataStoreModule
 import com.thesetox.exchange.exchangeModule
@@ -20,10 +21,13 @@ class ConversionApp : Application() {
 
     private val listOfModule =
         listOf(
+            // core modules
             networkModule,
             dataStoreModule,
             databaseModule,
+            // feature modules
             syncModule,
             exchangeModule,
+            balanceModule,
         )
 }

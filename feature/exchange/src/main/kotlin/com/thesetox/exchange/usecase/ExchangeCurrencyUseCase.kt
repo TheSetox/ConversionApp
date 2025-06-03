@@ -1,6 +1,6 @@
 package com.thesetox.exchange.usecase
 
-import com.thesetox.exchange.model.Balance
+import com.thesetox.balance.Balance
 import com.thesetox.exchange.model.ExchangeResult
 import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
 
