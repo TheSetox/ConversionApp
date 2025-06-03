@@ -1,4 +1,4 @@
-package com.thesetox.exchange
+package com.thesetox.exchange.repository
 
 import com.thesetox.databse.CurrencyRateDao
 import com.thesetox.databse.CurrencyRateEntity

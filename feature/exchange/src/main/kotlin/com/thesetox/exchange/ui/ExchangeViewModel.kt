@@ -1,33 +1,47 @@
-package com.thesetox.exchange
+package com.thesetox.exchange.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thesetox.exchange.ui.ExchangeState
+import com.thesetox.exchange.model.ExchangeEffect
+import com.thesetox.exchange.model.ExchangeResult
+import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
+import com.thesetox.exchange.model.ExchangeState
 import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
+import com.thesetox.exchange.usecase.ExchangeCurrencyUseCase
+import com.thesetox.exchange.usecase.GetDefaultBalanceUseCase
 import com.thesetox.exchange.usecase.GetListOfCurrencyUseCase
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ExchangeViewModel(
     private val getListOfCurrency: GetListOfCurrencyUseCase,
+    private val getDefaultBalance: GetDefaultBalanceUseCase,
     private val convertCurrency: ConvertCurrencyUseCase,
+    private val exchangeCurrency: ExchangeCurrencyUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow<ExchangeState>(ExchangeState())
     val state: StateFlow<ExchangeState> = _state.asStateFlow()
 
-    private var debounceJob: Job? = null
+    private val _effect = MutableSharedFlow<ExchangeEffect>()
+    val effect: SharedFlow<ExchangeEffect> = _effect.asSharedFlow()
 
     init {
+        getMapOfBalance()
         getListOfCurrencies()
     }
 
+    private fun getMapOfBalance() {
+        _state.update { it.copy(listOfBalance = getDefaultBalance()) }
+    }
+
     private fun getListOfCurrencies() {
-        getListOfCurrency
         viewModelScope.launch {
             getListOfCurrency().collect {
                 _state.emit(_state.value.copy(listOfCurrencies = it))
@@ -107,10 +121,38 @@ class ExchangeViewModel(
     }
 
     fun onSubmit() {
-        viewModelScope.launch {
-            // TODO check commission rates and get sellAmount and receiveAmount.
-            // Also get the selected currencies. Deduct and add balance.
-            Log.d(TAG, "onSubmit")
+        Log.d(TAG, "onSubmit")
+        val currentState = _state.value
+
+        val exchangeResult: ExchangeResultWithUpdatedBalances =
+            exchangeCurrency(
+                sellAmount = currentState.sellAmount,
+                receiveAmount = currentState.receiveAmount,
+                selectedSellCurrency = currentState.selectedSellCurrency,
+                selectedReceiveCurrency = currentState.selectedReceiveCurrency,
+                currentBalances = currentState.listOfBalance,
+            )
+
+        val updatedBalances = exchangeResult.updatedBalances
+        when (val result = exchangeResult.result) {
+            is ExchangeResult.Success -> {
+                _state.update { it.copy(listOfBalance = updatedBalances) }
+                viewModelScope.launch {
+                    val message =
+                        "You have converted ${currentState.sellAmount} " +
+                            "${currentState.selectedSellCurrency} to " +
+                            "${currentState.receiveAmount} " +
+                            "${currentState.selectedReceiveCurrency}."
+                    _effect.emit(ExchangeEffect.ShowDialog(message))
+                }
+            }
+
+            is ExchangeResult.Error -> {
+                Log.d(TAG, "onSubmitError ${result.message}")
+                viewModelScope.launch {
+                    _effect.emit(ExchangeEffect.ShowToastMessage(result.message))
+                }
+            }
         }
     }
 

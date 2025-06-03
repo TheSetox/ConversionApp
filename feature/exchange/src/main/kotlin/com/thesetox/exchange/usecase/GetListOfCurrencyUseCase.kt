@@ -1,6 +1,6 @@
 package com.thesetox.exchange.usecase
 
-import com.thesetox.exchange.ExchangeRepository
+import com.thesetox.exchange.repository.ExchangeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

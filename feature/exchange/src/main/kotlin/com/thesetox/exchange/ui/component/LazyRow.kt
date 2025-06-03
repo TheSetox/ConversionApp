@@ -7,12 +7,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.thesetox.designsystem.MediumTextStyle
+import com.thesetox.exchange.model.Balance
 
 @Composable
-fun BalanceLazyRow(listOfBalance: List<String> = listOf("1,000 EURO", "0.00 USD")) {
+fun BalanceLazyRow(listOfBalance: List<Balance>) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(36.dp)) {
         items(listOfBalance) {
-            Text(text = it, style = MediumTextStyle)
+            Text(text = "${it.value} ${it.code}", style = MediumTextStyle)
         }
     }
 }

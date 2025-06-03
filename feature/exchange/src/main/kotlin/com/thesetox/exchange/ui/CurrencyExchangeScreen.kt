@@ -1,24 +1,29 @@
 package com.thesetox.exchange.ui
 
+import android.app.AlertDialog
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thesetox.designsystem.component.ConversionSpacer
 import com.thesetox.designsystem.component.ConversionTopBar
-import com.thesetox.exchange.ExchangeViewModel
 import com.thesetox.exchange.R
+import com.thesetox.exchange.model.ExchangeEffect
+import com.thesetox.exchange.model.ExchangeState
 import com.thesetox.exchange.ui.component.BalanceLazyRow
 import com.thesetox.exchange.ui.component.CurrencyBottomSheet
 import com.thesetox.exchange.ui.component.ReceiveRow
@@ -28,10 +33,29 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CurrencyExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
+    val context = LocalContext.current
+
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     var showCurrencySheet by remember { mutableStateOf(false) }
     var isSelectingSellCurrency by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect {
+            when (it) {
+                is ExchangeEffect.ShowToastMessage -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is ExchangeEffect.ShowDialog -> {
+                    AlertDialog.Builder(context)
+                        .setTitle(R.string.currency_converted_dialog_title)
+                        .setMessage(it.message)
+                        .setPositiveButton(R.string.done_button_label, null)
+                        .show()
+                }
+            }
+        }
+    }
 
     CurrencyExchangeScaffold(
         state = state,

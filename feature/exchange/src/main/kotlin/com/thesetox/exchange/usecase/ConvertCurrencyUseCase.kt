@@ -1,6 +1,6 @@
 package com.thesetox.exchange.usecase
 
-import com.thesetox.exchange.ExchangeRepository
+import com.thesetox.exchange.repository.ExchangeRepository
 import java.util.Locale
 
 class ConvertCurrencyUseCase(private val repository: ExchangeRepository) {

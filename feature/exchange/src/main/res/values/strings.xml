@@ -6,4 +6,8 @@
     <string name="sell_label">Sell</string>
     <string name="receive_label">Receive</string>
     <string name="submit_button">Submit</string>
+
+    <string name="currency_converted_dialog_title">Currency converted</string>
+    <string name="done_button_label">Done</string>
+
 </resources>
