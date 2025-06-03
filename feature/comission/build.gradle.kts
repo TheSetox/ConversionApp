@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.thesetox.exchange"
+    namespace = "com.thesetox.comission"
     compileSdk = 35
 
     defaultConfig {
@@ -31,22 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    // core
-    implementation(projects.core.database)
-    api(projects.core.designsystem)
-
-    // feature
-    api(projects.feature.balance)
-    api(projects.feature.comission)
-
-    // Koin
-    implementation(libs.koin.androidx.compose)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
 }

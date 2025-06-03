@@ -1,6 +1,4 @@
-package com.thesetox.exchange.usecase
-
-import com.thesetox.exchange.model.CommissionConfig
+package com.thesetox.comission
 
 class GetCommissionUseCase {
     private var conversionCount = 0

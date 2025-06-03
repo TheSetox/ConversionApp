@@ -1,4 +1,4 @@
-package com.thesetox.exchange.model
+package com.thesetox.comission
 
 class CommissionConfig {
     var freeConversionsAtStartCount: Int = 0

@@ -1,6 +1,7 @@
 package com.thesetox.exchange.usecase
 
 import com.thesetox.balance.Balance
+import com.thesetox.comission.GetCommissionUseCase
 import com.thesetox.exchange.model.ExchangeResult
 import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
 
