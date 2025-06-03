@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.thesetox.exchange.ui.ExchangeState
 import com.thesetox.exchange.usecase.ConvertCurrencyUseCase
 import com.thesetox.exchange.usecase.GetListOfCurrencyUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ExchangeViewModel(
@@ -17,6 +19,8 @@ class ExchangeViewModel(
 ) : ViewModel() {
     private val _state = MutableStateFlow<ExchangeState>(ExchangeState())
     val state: StateFlow<ExchangeState> = _state.asStateFlow()
+
+    private var debounceJob: Job? = null
 
     init {
         getListOfCurrencies()
@@ -33,17 +37,16 @@ class ExchangeViewModel(
 
     fun onSellValueChanged(value: String) {
         Log.d(TAG, "onSellValueChanged: $value")
+        _state.update { it.copy(sellAmount = value) }
+
         viewModelScope.launch {
-            val currentState = _state.value
-            if (currentState.sellAmount == value) return@launch
             _state.emit(
-                currentState.copy(
-                    sellAmount = value,
+                _state.value.copy(
                     receiveAmount =
                         convertCurrency(
                             amount = value,
-                            toCurrency = currentState.selectedReceiveCurrency,
-                            fromCurrency = currentState.selectedSellCurrency,
+                            toCurrency = _state.value.selectedReceiveCurrency,
+                            fromCurrency = _state.value.selectedSellCurrency,
                         ),
                 ),
             )
@@ -52,17 +55,15 @@ class ExchangeViewModel(
 
     fun onReceiveValueChanged(value: String) {
         Log.d(TAG, "onReceiveValueChanged: $value")
+        _state.update { it.copy(receiveAmount = value) }
         viewModelScope.launch {
-            val currentState = _state.value
-            if (currentState.receiveAmount == value) return@launch
             _state.emit(
-                currentState.copy(
-                    receiveAmount = value,
+                _state.value.copy(
                     sellAmount =
                         convertCurrency(
                             amount = value,
-                            toCurrency = currentState.selectedSellCurrency,
-                            fromCurrency = currentState.selectedReceiveCurrency,
+                            toCurrency = _state.value.selectedSellCurrency,
+                            fromCurrency = _state.value.selectedReceiveCurrency,
                         ),
                 ),
             )
