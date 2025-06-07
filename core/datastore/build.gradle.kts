@@ -40,4 +40,9 @@ dependencies {
     // koin
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
 }
