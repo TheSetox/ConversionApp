@@ -1,4 +1,4 @@
-package com.thesetox.databse
+package com.thesetox.database
 
 import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
