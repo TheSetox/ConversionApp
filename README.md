@@ -32,7 +32,7 @@ ConversionApp follows a scalable and testable architecture:
 * **Layer Per Feature** – Each feature (e.g., Exchange) has its own independent layers
 * **Modular Approach** – Features and core layers are separated into modules for better reusability, testing, and build performance
 
-  
+
 ### 🔍 Module Overview
 
 * `app` is the main entry point and wires together the dependencies.
