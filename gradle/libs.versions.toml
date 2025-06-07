@@ -42,6 +42,12 @@ datastorePreferences = "1.1.7"
 # Database
 room = "2.7.1"
 
+# Test utilities
+androidxTestCore = "1.6.1"
+
+# Robolectric for unit testing
+robolectric = "4.11.1"
+
 [libraries]
 # Kotlin
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -93,6 +99,10 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 androidx-room-runtime = {group = "androidx.room", name = "room-runtime", version.ref = "room"}
 androidx-room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room"}
 androidx-room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
+
+# Testing utilities
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
