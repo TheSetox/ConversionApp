@@ -1,4 +1,4 @@
-package com.thesetox.databse
+package com.thesetox.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

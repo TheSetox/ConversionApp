@@ -3,7 +3,7 @@ package com.thesetox.conversionapp
 import android.app.Application
 import com.thesetox.balance.balanceModule
 import com.thesetox.comission.commissionModule
-import com.thesetox.databse.databaseModule
+import com.thesetox.database.databaseModule
 import com.thesetox.datastore.dataStoreModule
 import com.thesetox.exchange.exchangeModule
 import com.thesetox.network.networkModule

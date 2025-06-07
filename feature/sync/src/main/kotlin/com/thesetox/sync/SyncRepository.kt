@@ -1,6 +1,6 @@
 package com.thesetox.sync
 
-import com.thesetox.databse.CurrencyRateEntity
+import com.thesetox.database.CurrencyRateEntity
 import com.thesetox.network.ApiResult
 import com.thesetox.network.CurrencyRateResponse
 

@@ -1,4 +1,4 @@
-package com.thesetox.databse
+package com.thesetox.database
 
 import androidx.room.Dao
 import androidx.room.Query

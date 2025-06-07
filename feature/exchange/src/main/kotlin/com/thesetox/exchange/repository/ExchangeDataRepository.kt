@@ -1,7 +1,7 @@
 package com.thesetox.exchange.repository
 
-import com.thesetox.databse.CurrencyRateDao
-import com.thesetox.databse.CurrencyRateEntity
+import com.thesetox.database.CurrencyRateDao
+import com.thesetox.database.CurrencyRateEntity
 import kotlinx.coroutines.flow.Flow
 
 class ExchangeDataRepository(

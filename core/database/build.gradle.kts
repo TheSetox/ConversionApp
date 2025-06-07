@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.thesetox.databse"
+    namespace = "com.thesetox.database"
     compileSdk = 35
 
     defaultConfig {
