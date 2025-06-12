@@ -5,6 +5,13 @@ import com.thesetox.comission.GetCommissionUseCase
 import com.thesetox.exchange.model.ExchangeResult
 import com.thesetox.exchange.model.ExchangeResultWithUpdatedBalances
 
+/**
+ * Executes a currency exchange between two balances.
+ *
+ * The use case validates the provided amounts, applies commission via
+ * [GetCommissionUseCase], updates the balances and returns the result.
+ */
+
 class ExchangeCurrencyUseCase(private val getCommission: GetCommissionUseCase) {
     operator fun invoke(
         sellAmount: String,
