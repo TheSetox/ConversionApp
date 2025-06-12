@@ -9,5 +9,6 @@ import androidx.room.RoomDatabase
 )
 abstract class ConversionAppDatabase : RoomDatabase() {
     abstract fun currencyRateDao(): CurrencyRateDao
+
     abstract fun balanceDao(): BalanceDao
 }

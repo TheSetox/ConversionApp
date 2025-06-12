@@ -36,48 +36,52 @@ class BalanceDaoTest {
     }
 
     @Test
-    fun `updateBalance inserts when new`() = runTest {
-        // Act
-        dao.updateBalance(BalanceEntity("EUR", 1000.0))
+    fun `updateBalance inserts when new`() =
+        runTest {
+            // Act
+            dao.updateBalance(BalanceEntity("EUR", 1000.0))
 
-        // Assert
-        val list = dao.getBalanceList().first()
-        assertEquals(1, list.size)
-        assertEquals("EUR", list.first().code)
-    }
-
-    @Test
-    fun `updateBalance updates existing record`() = runTest {
-        // Arrange
-        dao.updateBalance(BalanceEntity("EUR", 1000.0))
-
-        // Act
-        dao.updateBalance(BalanceEntity("EUR", 2000.0))
-
-        // Assert
-        val balance = dao.getBalance("EUR")
-        assertEquals(2000.0, balance?.value)
-    }
+            // Assert
+            val list = dao.getBalanceList().first()
+            assertEquals(1, list.size)
+            assertEquals("EUR", list.first().code)
+        }
 
     @Test
-    fun `clearBalances deletes all entries`() = runTest {
-        // Arrange
-        dao.updateBalance(BalanceEntity("EUR", 1000.0))
+    fun `updateBalance updates existing record`() =
+        runTest {
+            // Arrange
+            dao.updateBalance(BalanceEntity("EUR", 1000.0))
 
-        // Act
-        dao.clearBalances()
+            // Act
+            dao.updateBalance(BalanceEntity("EUR", 2000.0))
 
-        // Assert
-        val list = dao.getBalanceList().first()
-        assertEquals(0, list.size)
-    }
+            // Assert
+            val balance = dao.getBalance("EUR")
+            assertEquals(2000.0, balance?.value)
+        }
 
     @Test
-    fun `getBalance returns null when balance is absent`() = runTest {
-        // Act
-        val result = dao.getBalance("EUR")
+    fun `clearBalances deletes all entries`() =
+        runTest {
+            // Arrange
+            dao.updateBalance(BalanceEntity("EUR", 1000.0))
 
-        // Assert
-        assertNull(result)
-    }
+            // Act
+            dao.clearBalances()
+
+            // Assert
+            val list = dao.getBalanceList().first()
+            assertEquals(0, list.size)
+        }
+
+    @Test
+    fun `getBalance returns null when balance is absent`() =
+        runTest {
+            // Act
+            val result = dao.getBalance("EUR")
+
+            // Assert
+            assertNull(result)
+        }
 }
