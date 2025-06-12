@@ -44,4 +44,31 @@ class LocalDataSourceTest {
             // Assert
             verify(dataStore).edit(any())
         }
+
+    @Test
+    fun `isDarkThemeEnabled reads from dataStore`() =
+        runTest {
+            // Arrange
+            whenever(dataStore.data).thenReturn(flowOf(emptyPreferences()))
+
+            // Act
+            localDataSource.isDarkThemeEnabled()
+
+            // Assert
+            verify(dataStore).data
+        }
+
+    @Test
+    fun `setDarkThemeEnabled writes to dataStore`() =
+        runTest {
+            // Arrange
+            whenever(dataStore.edit(any()))
+                .thenReturn(emptyPreferences())
+
+            // Act
+            localDataSource.setDarkThemeEnabled(true)
+
+            // Assert
+            verify(dataStore).edit(any())
+        }
 }
