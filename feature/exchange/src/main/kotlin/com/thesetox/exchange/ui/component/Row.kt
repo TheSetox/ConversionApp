@@ -88,3 +88,13 @@ private fun SellRowPreview() = SellRow()
 @Preview(showBackground = true)
 @Composable
 private fun ReceiveRowPreview() = ReceiveRow()
+
+@Preview(showBackground = true)
+@Composable
+private fun ConversionRowPreview() =
+    ConversionRow(
+        leadIcon = { LeadingIcon(color = Color.Red, drawable = R.drawable.arrow_upward) },
+        titleId = R.string.sell_label,
+        value = "100",
+        currency = "EUR",
+    )
