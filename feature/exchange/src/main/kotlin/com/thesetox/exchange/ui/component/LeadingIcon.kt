@@ -35,5 +35,4 @@ fun LeadingIcon(
 
 @Preview
 @Composable
-private fun LeadingIconPreview() =
-    LeadingIcon(color = Color.Red, drawable = R.drawable.arrow_upward)
+private fun LeadingIconPreview() = LeadingIcon(color = Color.Red, drawable = R.drawable.arrow_upward)
