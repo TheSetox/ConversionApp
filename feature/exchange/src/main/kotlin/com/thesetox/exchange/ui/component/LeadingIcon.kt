@@ -10,7 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.thesetox.exchange.R
 
 @Composable
 fun LeadingIcon(
@@ -30,3 +32,8 @@ fun LeadingIcon(
         )
     }
 }
+
+@Preview
+@Composable
+private fun LeadingIconPreview() =
+    LeadingIcon(color = Color.Red, drawable = R.drawable.arrow_upward)
