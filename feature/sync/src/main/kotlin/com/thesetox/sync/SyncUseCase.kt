@@ -6,6 +6,18 @@ import com.thesetox.network.CurrencyRateResponse
 import kotlinx.serialization.json.Json
 import java.security.MessageDigest
 
+/**
+ * Synchronizes local currency rates with the remote API.
+ *
+ * The use case downloads the latest rates, generates an MD5 hash of the
+ * response and compares it with the last stored hash to determine if
+ * an update is required. When the hash differs the new rates are stored
+ * in the database and the hash is persisted. The invocation returns a
+ * human readable message describing whether synchronization was performed
+ * or not.
+ *
+ * @param repository data source used to fetch and persist currency rates
+ */
 class SyncUseCase(private val repository: SyncRepository) {
     suspend operator fun invoke(): String {
         return when (val response = repository.fetchCurrencyRates()) {
