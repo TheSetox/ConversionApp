@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
  * Repository exposing access to currency exchange rates stored locally.
  */
 interface ExchangeRepository {
-
     /**
      * Continuous stream of all available currency rates.
      */
