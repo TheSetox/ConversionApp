@@ -21,3 +21,7 @@ Responsible for synchronizing currency rates from the remote API. `SyncUseCase` 
 ## settings
 
 Stores user preferences such as whether dark theme is enabled. It exposes simple use cases via `settingsModule`.
+
+## transaction
+
+Stores completed exchanges so the app can show a transaction history. The module exposes simple use cases to add and retrieve `Transaction` records.
