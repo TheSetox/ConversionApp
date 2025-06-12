@@ -12,7 +12,6 @@ import com.thesetox.network.CurrencyRateResponse
  * changes can be detected on subsequent syncs.
  */
 interface SyncRepository {
-
     /**
      * Fetch the latest exchange rates from the remote source.
      *
