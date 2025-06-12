@@ -20,6 +20,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel that manages the state of the currency exchange screen.
+ *
+ * It exposes the current [ExchangeState] to the UI and reacts to user
+ * events such as changing amounts or currencies. Conversion logic and
+ * balance updates are delegated to the injected use cases.
+ *
+ * User feedback like toast messages or dialogs is emitted through
+ * [ExchangeEffect].
+ */
 class ExchangeViewModel(
     private val getListOfCurrency: GetListOfCurrencyUseCase,
     private val getDefaultBalance: GetDefaultBalanceUseCase,
