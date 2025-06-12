@@ -11,8 +11,9 @@ import org.koin.dsl.module
  * Koin module that provides the Room database and its DAO dependencies.
  *
  * The module exposes a singleton instance of [ConversionAppDatabase] built with
- * `Room.databaseBuilder` and a singleton [CurrencyRateDao] retrieved from the
- * database. These can then be injected throughout the app.
+ * `Room.databaseBuilder` and singleton DAOs ([CurrencyRateDao] and
+ * [BalanceDao]) retrieved from the database. These can then be injected
+ * throughout the app.
  */
 val databaseModule =
     module {
@@ -26,4 +27,5 @@ val databaseModule =
         }
 
         single { get<ConversionAppDatabase>().currencyRateDao() }
+        single { get<ConversionAppDatabase>().balanceDao() }
     }
