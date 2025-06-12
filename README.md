@@ -40,6 +40,7 @@ ConversionApp follows a scalable and testable architecture:
 * `feature:sync` fetches the latest rates from the remote API and updates the database.
 * `feature:commission` applies dynamic commission logic (e.g. first 5 free, 0.7% after).
 * `feature:balance` manages the user's wallet-like balance.
+* `feature:settings` stores preferences like the dark theme toggle.
 * `core:network`, `core:datastore`, `core:database`, and `core:designsystem` are reusable base modules shared across features.
 
 Each feature module depends only on what it needs and interacts with shared core modules through interfaces.

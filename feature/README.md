@@ -17,3 +17,7 @@ Handles the currency exchange flow, including Compose UI components and several 
 ## sync
 
 Responsible for synchronizing currency rates from the remote API. `SyncUseCase` checks if an update is needed, saves rates to the database and stores an MD5 hash to avoid unnecessary work. A background `SyncService` triggers the process.
+
+## settings
+
+Stores user preferences such as whether dark theme is enabled. It exposes simple use cases via `settingsModule`.
