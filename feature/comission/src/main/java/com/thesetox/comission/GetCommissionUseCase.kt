@@ -1,5 +1,14 @@
 package com.thesetox.comission
 
+/**
+ * Calculates the commission fee for each currency conversion.
+ *
+ * This use case keeps track of how many conversions have been made and
+ * applies rules from [CommissionConfig] to determine the fee for a given
+ * transaction. By default, the first five conversions are free and a 0.7%
+ * commission is charged afterwards. The configuration can be extended with
+ * additional rules if needed.
+ */
 class GetCommissionUseCase {
     private var conversionCount = 0
 
