@@ -7,10 +7,25 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+/**
+ * Defines the contract for retrieving currency exchange rates from the remote
+ * service.
+ */
 interface CurrencyRateApi {
+    /**
+     * Fetch the latest currency rates.
+     *
+     * @return an [ApiResult] wrapping the [CurrencyRateResponse] or an error
+     *   describing what went wrong.
+     */
     suspend fun fetchCurrencyRates(): ApiResult<CurrencyRateResponse>
 }
 
+/**
+ * Implementation of [CurrencyRateApi] backed by a Ktor [HttpClient].
+ *
+ * @param client HTTP client used to make requests.
+ */
 class CurrencyRateRemoteSource(private val client: HttpClient) : CurrencyRateApi {
     override suspend fun fetchCurrencyRates(): ApiResult<CurrencyRateResponse> {
         val endpoint = "/tasks/api/currency-exchange-rates"
