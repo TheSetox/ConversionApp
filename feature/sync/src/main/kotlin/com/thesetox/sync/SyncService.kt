@@ -14,20 +14,36 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+/**
+ * Android [Service] responsible for keeping currency rates in sync.
+ *
+ * The service exposes a [LocalBinder] so activities can bind to it and
+ * trigger synchronization through [startSyncing]. Once started, the
+ * service executes [SyncUseCase] every five seconds on a background
+ * coroutine until the binding is removed.
+ */
 class SyncService : Service(), KoinComponent {
     private val binder = LocalBinder()
     private var job: Job? = null
 
     private val sync: SyncUseCase by inject<SyncUseCase>()
 
+    /**
+     * Binder returned to clients so they can access [SyncService] methods.
+     */
     inner class LocalBinder : Binder() {
+        /** Returns the current [SyncService] instance. */
         fun getService(): SyncService = this@SyncService
     }
 
+    /** Called when a client binds to the service. */
     override fun onBind(intent: Intent?): IBinder {
         return binder
     }
 
+    /**
+     * Starts periodic synchronization if it isn't already running.
+     */
     fun startSyncing() {
         if (job?.isActive == true) return
 
@@ -41,6 +57,7 @@ class SyncService : Service(), KoinComponent {
             }
     }
 
+    /** Stops the active synchronization job, if any. */
     private fun stopSyncing() {
         job?.cancel()
     }
