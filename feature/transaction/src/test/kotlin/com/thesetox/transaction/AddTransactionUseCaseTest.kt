@@ -10,13 +10,14 @@ class AddTransactionUseCaseTest {
         val repository = TransactionDataRepository()
         val addTransaction = AddTransactionUseCase(repository)
         val getTransactions = GetTransactionsUseCase(repository)
-        val transaction = Transaction(
-            sellCurrency = "EUR",
-            receiveCurrency = "USD",
-            sellAmount = 10.0,
-            receiveAmount = 12.0,
-            commission = 0.07,
-        )
+        val transaction =
+            Transaction(
+                sellCurrency = "EUR",
+                receiveCurrency = "USD",
+                sellAmount = 10.0,
+                receiveAmount = 12.0,
+                commission = 0.07,
+            )
 
         // Act
         addTransaction(transaction)
